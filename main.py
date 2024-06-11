@@ -56,7 +56,7 @@ def search_game(driver, game_name):
     # Find the first 5 search results and print their link text
     search_results = driver.find_elements(By.CSS_SELECTOR, ".entry-title a")
     if search_results:
-        print("\nSearch Results:")
+        print(f"\n{Fore.WHITE}Search Results:{Fore.RESET}")
         search_results_text = [result.text for result in search_results[:5]]
         for i, result_text in enumerate(search_results_text, start=1):
             # Generate random color for each result
@@ -70,7 +70,7 @@ def search_game(driver, game_name):
 
 while True:
     # Taking user input, the game name
-    game_name = input("Enter Game Name: ")
+    game_name = input("\nEnter Game Name: ")
     
     # Search for the game
     search_results, search_results_text = search_game(driver, game_name)
@@ -82,7 +82,7 @@ while True:
 # Ask the user to select one of the results
 while True:
     try:
-        selection = int(input("\nSelect the result number you want to continue with (1-5): "))
+        selection = int(input(f"\n{Fore.WHITE}Select the result number you want to continue with (1-5): {Fore.RESET}"))
         if 1 <= selection <= len(search_results):
             break
         else:
@@ -94,8 +94,8 @@ while True:
 selected_result_text = search_results_text[selection - 1]
 selected_result_link = driver.find_element(By.LINK_TEXT, selected_result_text)
 driver.execute_script("arguments[0].click();", selected_result_link)
-print(f"\nSelected result: {selected_result_text}\n")
-print("                                                 Download Links")
+print(f"\n{Fore.WHITE}Selected result: {selected_result_text}\n")
+print("                                         Download Links")
 
 # Wait for the page downloading links to load on page
 WebDriverWait(driver, 10).until(
@@ -118,7 +118,7 @@ for li in soup.find_all('li'):
             if website_name:
                 # Generate random color for each link
                 color = Fore.GREEN
-                print(f"\nWebsite Name: {Fore.LIGHTMAGENTA_EX}{website_name.strip()}{Fore.RESET} | Link: {color}{link}")
+                print(f"\n{Fore.WHITE}Website Name: {Fore.LIGHTMAGENTA_EX}{website_name.strip()}{Fore.RESET} | Link: {color}{link}{Fore.RESET}")
 
 # Close the browser
 driver.quit()
