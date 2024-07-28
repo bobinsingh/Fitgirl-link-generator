@@ -66,7 +66,7 @@ def search_game(driver, game_name):
             print(f"{color}{i}. {result_text}")
         return search_results[:5], search_results_text
     else:
-        print("\nNo search results found\nMake sure the Game name you entered is correct and try again\n")
+        print("\nNo search results found\nMake sure the Game name you entered is correct and try again!\n")
         return None, None
 
 while True:
